@@ -7,6 +7,7 @@ $arr = ['a'=>'aaa','b'=>'bbb','c'=>'ccc'];
 //notepad++单行、多行注释  //方式        ：ctrl+k
 //区块注释                 / * */ 方式    ：ctrl+q
 //取消单行、多行、区块注释               ：ctrl+shift+k
+//ctrl+d:复制当前行到下一行
 /*
 foreach($arr as $key => $value){
 	   //echo  $arr[$key].'<br />';
