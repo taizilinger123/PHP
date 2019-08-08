@@ -21,7 +21,7 @@ echo '<table width="600" border="1">';
 		       echo '<td>'.$rows['id'].'</td>';
 			   echo '<td>'.$rows['username'].'</td>';
 			   echo '<td>'.$rows['address'].'</td>';
-			   echo '<td>'.$rows['sex'].'</td>';
+			   echo '<td>'.($rows['sex']==1?'男':'女').'</td>';
 			   echo '<td>'.$rows['age'].'</td>';
 			   echo '<td><a href="del.php?id='.$rows['id'].'">删除</a>/<a href="update.php?id='.$rows['id'].'">修改</a></td>';
 		  echo '</tr>';

@@ -18,11 +18,11 @@ mysqli_select_db($link, 'bbs');
 $sql = "select * from bbs_user";
 
 //6.发送sql语句
-$res = mysqli_query($link, $sql);  //返回一个对象
+$res = mysqli_query($link, $sql);  
 //var_dump($res);
 
 //7.处理结果集
-$result = mysqli_fetch_assoc($res); //一个一个往下读的，返回的是一个一维的关联数组(必须记住)
+$result = mysqli_fetch_assoc($res);
 $result = mysqli_fetch_assoc($res);
 $result = mysqli_fetch_assoc($res);
 var_dump($result);
