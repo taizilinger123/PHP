@@ -28,5 +28,5 @@ echo '<table width="600" border="1">';
 		  
 	  }
 echo '</table>';
-
+echo '<a href="add.php">添加</a>';
 mysqli_close($link);
