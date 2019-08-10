@@ -1,0 +1,19 @@
+//求出来总条数   13条数据
+
+//每页显示5条
+ 
+ceil(总条数/每页显示数)
+
+select * from bbs_user limit 0, 5  这是第一页  1
+
+select * from bbs_user limit 5, 5  这是第二页  2
+
+select * from bbs_user limit 10,5  这是第三页  3
+
+select * from bbs_user limit 15,5  这是第四页  4
+
+推出来的公式
+    ($page - 1) * $num   (5)
+	
+
+
