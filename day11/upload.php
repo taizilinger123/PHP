@@ -69,17 +69,3 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])){
 	echo '不是上传文件';
 	exit;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
