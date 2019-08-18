@@ -10,7 +10,8 @@ class Animal
 class Person extends Animal
 {
 	public function say()
-	{
+	{   
+		//ctrl+shift+d复制当前行到下一行
 		echo '我的姓名是'.$this->name.'<br />';
 		echo '我的年龄是'.$this->age.'<br />';
 		echo '我的身高是'.$this->height.'<br />';
