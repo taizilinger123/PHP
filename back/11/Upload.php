@@ -118,7 +118,7 @@ class Upload
 
     	//判断文件是否可写
     	if (!is_writable($this->path)) {
-    	    return chmod($this->path, 07777);
+    	    return chmod($this->path, 0777);
     	}
 
     	return true;
