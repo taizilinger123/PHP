@@ -173,9 +173,9 @@ class Image
 			//创建透明色
 			$newtransparentcolor = imagecolorallocate(
 			     $newImg,
-				 $transparentcolor['red'];
-				 $transparentcolor['green'];
-				 $transparentcolor['blue'];
+				 $transparentcolor['red'],
+				 $transparentcolor['green'],
+				 $transparentcolor['blue']
 			);
 		 }else{
 		      //将黑色作为透明色，因为创建图像后在第一次分配颜色时背景默认为黑色
@@ -253,6 +253,5 @@ class Image
 				break;
 		}
 		return $image;
-		###################
 	}
 }
