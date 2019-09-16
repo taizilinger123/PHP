@@ -1,0 +1,64 @@
+简介
+   主流php开发框架
+   父类(Model类)
+1、sql语句回顾
+   insert into user(name, age, money) values('abc', 18, 1000);
+   update user set age=20, money=1500 where id=1;
+   delete from user where id=2;
+   select *  from user where id=3 group by ... having ... order by ... limit ... 
+
+2、连贯操作
+class Person
+{
+	function test()
+	{
+	  return $this;
+	}
+	function demo()
+	{
+	  return $this;
+	}
+}
+$p = new Person();
+$p->test()->demo();
+
+3、__call函数
+    __call($name, $args)
+    getByUsername('呵呵');
+    getById(5);
+
+4、两种操作
+    增删改查
+    分为两种
+    一种是要结果集的(查)        query
+        返回是二维数组
+    一种是不要结果集的(增删改)  exec
+        增加：mysqli_insert_id()
+        删除和修改:返回给你受影响的行数
+
+5、无顺序替换
+    $user->table('user')->limit()->order()->field()->select();
+    $user->table()->order()->limit()->field()->select();
+    中间的返回的都是$this
+
+    limit()
+    order()
+    having()
+    group()
+    table()
+    field()
+    where()
+
+    options[
+           'where' => 'where id > 10',
+           'limit' => 'limit 3, 3',
+           'table' => 'user',
+           'field' => 'id, name, password',
+           'order' => '',
+           ...
+    ];
+
+    select返回的是结果集
+    $sql = 'select %FIELD%  from %TABLE% %WHERE% %GROUP% %HAVING% %ORDER% %LIMIT%';
+    占位符 $sql = str_replace(['%FIELD%', '%TABLE%'],[$this->options['field'], $this->options['table']], $sql)
+
