@@ -253,6 +253,6 @@ class Image
 				break;
 		}
 		return $image;
-
+		###################
 	}
 }
