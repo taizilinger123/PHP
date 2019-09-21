@@ -4,8 +4,10 @@ $config = include 'config.php';
 
 $m = new Model($config);
 
+var_dump($m->getByName('成龙'));
+
 //测试max函数
-var_dump($m->table('user')->max('money'));
+//var_dump($m->table('user')->max('money'));
 
 //测试update方法
 //$data = ['name' => '成龙', 'money' => 3000];
@@ -44,7 +46,7 @@ class Model
 	//数据库连接资源
 	protected $link;
 	//数据表名      这里可以自己指定表名
-	protected $tableName;
+	protected $tableName = 'user';
 
 	//sql语句
 	protected $sql;
@@ -112,6 +114,8 @@ class Model
 			//将table默认设置为tableName
 			if($value == 'table'){
 				$this->options[$value] = $this->tableName;
+			}else if($value == 'field'){
+                $this->options[$value] = '*';
 			}
 		}
 	}
@@ -199,6 +203,8 @@ class Model
 	//query
 	function query($sql)
 	{
+		//清空options数组中的值
+		$this->initOptions();
 	   //var_dump($sql);
 	   //die();
 	   //执行sql语句	
@@ -215,6 +221,8 @@ class Model
 	//exec
 	function exec($sql, $isInsert = false)
 	{
+	   //清空options数组
+	   $this->initOptions();
 	   //执行sql语句
        $result = mysqli_query($this->link, $sql);
        if($result && mysqli_affected_rows($this->link)){
@@ -316,4 +324,24 @@ class Model
     	return $result[0]['max'];
     }
 
+    //析构方法
+    function __destruct()
+    {
+    	mysqli_close($this->link);
+    }
+
+    //getByName  getByAge
+    //__call
+    function __call($name, $args)
+    {
+       //获取前5个字符
+       $str = substr($name, 0, 5);
+       //获取后面的字段名
+       $field = strtolower(substr($name, 5));
+       //判断前五个字符是否是getby
+       if ($str == 'getBy') {
+       	 	return $this->where($field.'="'.$args[0].'"')->select();
+       	 }	 
+       	 return false;
+    }
 }
