@@ -1,0 +1,40 @@
+PHP高级实战-模板引擎类
+
+1、模板引擎原理
+     在html中穿插php的代码，但是文件后缀名是php
+	 <html>
+	      <?=$title;?>
+		  <?php if($a > 5); ?>
+		  <?php endif; ?>
+	 </html>
+	 
+	 为了让前端和后端的代码分离，后端就是.php,用来获取数据的，前端就是.html,用来展示数据的
+	 问题：这个html和php如何联系到一块呢？
+	 引入模板引擎技术
+	      原理：
+		      在html页面中展示数据的时候，使用模板语法
+			       {$title} {if $a > 0} {/if} {foreach $data as $value}
+		      但是这样并不能真正的展示出来
+			  需要通过模板引擎将html文件中的模板语法替换为php语法
+			  通过正则表达式来替换模板语法  compile
+			       {$title} => <?=$title; ?>
+				   {if $a > 0} => <?php if {$a > 0}; ?>
+				   
+			  然后将替换后的字符串写入到一个文件中，这个文件就叫缓存文件，这个缓存文件的后缀是.php 
+			  只需要将这个缓存文件给include进来即可显示当前页面
+
+2、正则替换
+     preg_replace  将正则匹配到的字符串替换为指定的字符串
+	      {$pattern, $replace, $str};
+	 preg_quota
+	      定界符、原子、元字符、模式修正符
+		  将正则特殊字符进行转义   {} [] () * . ? + 
+	 preg_replace_callback
+	      {$pattern, callback, $str};
+3、include
+     {include xxx.html}
+	 <?php include xxx.php; ?>
+4、缺点
+     面向过程
+	 每次都会生成缓存
+	 分页时候生成都是同一个缓存文件
