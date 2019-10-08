@@ -93,4 +93,45 @@ class Tpl
         }
     }
 
+    //compile方法，编译html文件
+    protected function compile($filePath)
+    {
+       //读取文件内容
+       $html = file_get_contents($filePath);
+       //正则替换
+       $array = [
+           '{$%%}' => '<?=$\1; ?>',
+           '{foreach %%}' => '<?php foreach (\1): ?>',
+           '{/foreach}' => '<?php endforeach?>',
+           '{include %%}' => '',
+           '{if %%}' => '<?php if (\1): ?>',
+       ];
+       //遍历数组，将%%全部修改为 .+ ,然后执行正则替换
+       foreach ($array as $key => $value) {
+       	  //生成正则表达式
+       	  $pattern = '#'.str_replace('%%', '(.+?)', preg_quote($key, '#')).'#';
+       	  //实现正则替换
+       	  if (strstr($pattern, 'include')) {
+       	  	   $html = preg_replace_callback($pattern, [$this, 'parseInclude'], $html);
+       	  }else{
+             //执行替换
+       	  	$html = preg_replace($pattern, $value, $html);
+       	  }
+       }
+       //返回替换后的内容
+       return $html;
+    }
+    
+    //处理include正则表达式，$data就是匹配到的内容
+    protected function parseInclude($data)
+    {
+       //将文件名两边的引号去除掉
+       $fileName = trim($data[1], '\'"');
+       //然后不包含文件生成缓存
+       $this->display($fileName, false);
+       //拼接缓存文件全路径
+       $cacheName = md5($fileName).'.php';
+       $cachePath = rtrim($this->cacheDir, '/').'/'.$cacheName;
+       return '<?php include "'.$cachePath.'"?>';
+    }
 }
