@@ -52,3 +52,34 @@ $_POST	           包含所有通过 POST 提交的表单数据
 $_POST['name']	   获取 <input name="name"> 的值
 $_POST['counts']	 获取 <input name="counts"> 的值
 isset(...)	       检查是否设置了某个字段
+
+var_dump()和print_r()是什么意思？
+$arr = [1, "hello", false];
+var_dump($arr);
+array(3) {
+  [0]=>
+  int(1)
+  [1]=>
+  string(5) "hello"
+  [2]=>
+  bool(false)
+}
+print_r() 用于打印数组或对象的结构和值，但不会显示变量的类型，结果更简洁，适合快速查看数组内容。
+$arr = [1, "hello", false];
+print_r($arr);
+Array
+(
+    [0] => 1
+    [1] => hello
+    [2] => 
+)
+var_dump() 和 print_r() 对比总结
+功能	             var_dump()	                        print_r()
+是否显示类型	       ✅ 是（如 bool、int、string）       ❌否
+是否适合调试	       ✅非常适合，信息详细	               ✅适合快速查看数组或对象结构
+是否支持字符串	     ✅支持，显示长度和内容	             ✅支持
+输出格式	           比较详细、可嵌套输出	                 比较简洁
+建议使用场景
+想知道变量的类型和值 ➜ 用 var_dump()；
+只想快速查看数组或对象结构 ➜ 用 print_r()；
+输出给用户 ➜ 不建议用这两个，建议用 echo 或模板渲染。
