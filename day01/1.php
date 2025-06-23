@@ -83,3 +83,35 @@ var_dump() 和 print_r() 对比总结
 想知道变量的类型和值 ➜ 用 var_dump()；
 只想快速查看数组或对象结构 ➜ 用 print_r()；
 输出给用户 ➜ 不建议用这两个，建议用 echo 或模板渲染。
+PHP :: 双冒号用法对照表
+用法	                     示例	                               说明	                                  适用场景
+类常量	                     ClassName::CONSTANT	               访问类中定义的 const 常量	           读取固定不变的值
+静态属性	                   ClassName::$property                访问类中声明为 static 的属性	         跨对象共享数据
+静态方法	                   ClassName::method()	               调用 static 修饰的方法	             工具类、无需实例化的操作
+当前类常量/方法	           self::CONSTANT / self::method()	   在类内部访问自己的常量或静态方法	     类内部自身调用
+延迟静态绑定	               static::method()	                   保留继承类的调用上下文（晚绑定）	     工厂模式、继承覆盖
+父类成员	                   parent::method()	                   在子类中调用父类的静态方法或常量	     覆写后仍想访问父类内容
+class A {
+    const VERSION = '1.0';
+    public static $count = 0;
+
+    public static function showVersion() {
+        echo self::VERSION;
+    }
+}
+
+class B extends A {
+    const VERSION = '2.0';
+
+    public static function showParentVersion() {
+        echo parent::VERSION;
+    }
+
+    public static function showDynamicVersion() {
+        echo static::VERSION;
+    }
+}
+
+A::showVersion();           // 输出 1.0
+B::showParentVersion();     // 输出 1.0
+B::showDynamicVersion();    // 输出 2.0
