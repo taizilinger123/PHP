@@ -11,7 +11,7 @@ fseek($fp, 0);
 echo fread($fp, 3);
 
 fclose($fp);
-
+============================================================================
 // mysqli_fetch_row()
 $row = mysqli_fetch_row($result);
 echo $row[0];
