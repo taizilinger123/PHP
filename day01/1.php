@@ -115,3 +115,16 @@ class B extends A {
 A::showVersion();           // 输出 1.0
 B::showParentVersion();     // 输出 1.0
 B::showDynamicVersion();    // 输出 2.0
+
+动作	                                    类比
+$_POST['user']	                          用户在表格上写下名字，交给你，客户端发生的
+$_SESSION['admin']	                      你把这个名字记在一个小本本（服务器 session）上，下次还能记得是谁登录的，服务器端发生的
+$_SESSION 的信息是服务器存储的，不容易被篡改；而 $_POST 是用户提交的数据，容易造假，要验证！
+使用 $_SESSION 之前，必须在页面顶部写：
+session_start();
+名称	                                     含义说明
+$_POST	                                   是一个 超全局数组，用于接收 HTML 表单通过 POST 方法提交的数据。
+                                           比如登录表单中输入的用户名、密码、验证码等
+$_POST['user']	                           就是用户在 <input name="user"> 中填写的用户名
+$_SESSION	                                 是另一个 超全局数组，用于在 多个页面之间 共享用户登录状态的信息。
+                                           它存储在 服务器端，而不是浏览器
