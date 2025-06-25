@@ -128,3 +128,19 @@ $_POST	                                   是一个 超全局数组，用于接�
 $_POST['user']	                           就是用户在 <input name="user"> 中填写的用户名
 $_SESSION	                                 是另一个 超全局数组，用于在 多个页面之间 共享用户登录状态的信息。
                                            它存储在 服务器端，而不是浏览器
+<link href="__ROOT__/Public/Css/style.css" rel="stylesheet" type="text/css" />
+| 部分                                     | 含义                                            |
+| -------------------------------------- | --------------------------------------------- |
+| `<link ... />`                         | 用来在 HTML 中引入外部 CSS 文件的标签                      |
+| `href="__ROOT__/Public/Css/style.css"` | 引入的 CSS 文件路径，这里用到了一个 ThinkPHP 模板变量 `__ROOT__` |
+| `rel="stylesheet"`                     | 表示这是一个样式表                                     |
+| `type="text/css"`                      | 声明这是 CSS 类型的文件（可写可不写）                         |
+__ROOT__ 是什么？
+这是 ThinkPHP 模板中的内置变量，表示当前网站的根目录路径。
+举个例子：
+假设你的项目地址是：
+http://localhost/myproject/
+那么：
+__ROOT__/Public/Css/style.css
+等价于：
+/myproject/Public/Css/style.css
