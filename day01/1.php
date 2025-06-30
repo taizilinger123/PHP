@@ -144,3 +144,17 @@ http://localhost/myproject/
 __ROOT__/Public/Css/style.css
 等价于：
 /myproject/Public/Css/style.css
+http://example.com/shop.php?name=apple&count=3
+$name = $_GET['name'];     // 值为 "apple"
+$count = $_GET['count'];   // 值为 "3"
+| 语法                  | 说明             |
+| ------------------- | -------------- |
+| `$_GET['参数名']`      | 获取通过 URL 传递的参数 |
+| `isset($_GET['x'])` | 判断参数是否存在，避免报错  |
+⚠️ 注意：
+URL 中的数据 用户可随意篡改，所以必须验证和过滤
+如果参数没传，直接用 $_GET['xxx'] 会报错（建议配合 isset()）
+更安全的用法可以用 filter_input() 或 htmlspecialchars()
+if (isset($_GET['name'])) {
+    $name = htmlspecialchars($_GET['name']);
+}
