@@ -158,3 +158,9 @@ URL 中的数据 用户可随意篡改，所以必须验证和过滤
 if (isset($_GET['name'])) {
     $name = htmlspecialchars($_GET['name']);
 }
+implode()：数组 ➜ 字符串
+explode()：字符串 ➜ 数组
+implode(分隔符, 数组)
+$upcar = ['101:2', '102:3', '103:1'];
+$str = implode('@', $upcar);
+$str = "101:2@102:3@103:1";
